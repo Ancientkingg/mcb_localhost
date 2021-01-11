@@ -14,7 +14,7 @@ if(process.argv.includes("-localhost")){
                 remotecommit.stdout.on('data',(data)=>{
                     remotecommitID = data.toString();
                     if(remotecommitID != localcommitID){
-                        console.log(LCL + "found an newer version of mcb localhost");
+                        console.log(LCL + "found a newer version of mcb localhost");
                         console.log(LCL + "automatically updating to the latest version...");
                         exec("git pull", {cwd: repo},()=>{
                             exec("npm run update", {cwd: repo},()=>{

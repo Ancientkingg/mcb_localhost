@@ -1,5 +1,26 @@
 //generated config
 
+module.exports = mcb_localhost({
+  mc: {
+    dev: false,
+    header: "#built using mc-build (https://github.com/mc-build/mc-build)",
+    internalScoreboard: "LANG_MC_INTERNAL",
+    rootNamespace: null,
+  },
+  global: {},
+});
+
+
+
+
+
+
+
+
+
+
+
+
 const fs = require("fs")
 const https = require("https")
 const { spawn } = require("child_process")
@@ -96,12 +117,15 @@ function serverReload(){
                 if (!fs.existsSync(dir + `/world/datapacks/generic_datapack_${i}`)) {
                   fs.mkdirSync(dir + `/world/datapacks/generic_datapack_${i}`)
                 }
-                exec("xcopy /e /i /y \"" + datapacks[i] + "/data\" \"" + dir + `/world/datapacks/generic_datapack_${i}/data\"`, (err)=>{});
-                fs.copyFileSync(datapacks[i] + '\\pack.mcmeta', dir + `/world/datapacks/generic_datapack_${i}/pack.mcmeta`,0 ,()=>{})
+                exec("xcopy /e /i /y \"" + datapacks[i] + "/data\" \"" + dir + `/world/datapacks/generic_datapack_${i}/data\"`, (err)=>{
+                  fs.copyFile(datapacks[i] + '\\pack.mcmeta', dir + `/world/datapacks/generic_datapack_${i}/pack.mcmeta`,0,()=>{
+                    server.stdin.setEncoding('utf-8');
+                    server.stdin.write("reload\n")
+                  })
+                });
               }
             }
-            server.stdin.setEncoding('utf-8');
-            server.stdin.write("reload\n")
+            
   }
 }
 
@@ -109,13 +133,3 @@ function mcb_localhost(config) {
   config.global.onBuildSuccess = serverReload
   return config;
 }
-
-module.exports = mcb_localhost({
-  mc: {
-    dev: false,
-    header: "#built using mc-build (https://github.com/mc-build/mc-build)",
-    internalScoreboard: "LANG_MC_INTERNAL",
-    rootNamespace: null,
-  },
-  global: {},
-});

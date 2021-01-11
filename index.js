@@ -7,6 +7,7 @@ if(!fs.existsSync(dir)){
     fs.mkdirSync(dir);
     fs.copyFileSync("./setup.js",dir + "\\setup.js");
     fs.copyFileSync("./config.js",dir + "\\config.js");
+    fs.writeFileSync(dir + "\\repoDir",process.cwd());
     fs.writeFileSync(mcbuild_dir + "\\cli.js","#!/usr/bin/env node\nrequire(\"./lib/core/check_for_lang_updates\");\nrequire(\"./mcb_localhost/setup\");");
     console.log(LCL + "the mcb_localhost was successfully installed into mc-build")
 }else{

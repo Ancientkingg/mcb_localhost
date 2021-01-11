@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "remove": "node remove.js",
-    "setup": "node index.js"
+    "setup": "node index.js",
+    "update": "node remove.js && node index.js"
   },
   "author": "Ancientkingg",
   "license": "MIT",

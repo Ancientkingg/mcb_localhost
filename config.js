@@ -29,7 +29,9 @@ if (!fs.existsSync(dir)) {
 }
 
 function serverStart() {
-  fs.rmdirSync(dir + "/world/datapacks/generic_datapack/data", {recursive: true})
+  for(i = 0; i < datapacks.length; i++){
+    fs.rmdirSync(dir + `/world/datapacks/generic_datapack_${i}/data`, {recursive: true})
+  }
   server = spawn("java", ["-Xmx1024M", "-Xms1024M", "-jar", "server.jar", "nogui"], { cwd: "./" + dir + "/" })
   process.stdin.pipe(server.stdin)
   server.stdout.once('data', () => {
@@ -79,20 +81,24 @@ if (!fs.existsSync("./.mcproject/mcb_localhost/server.jar")) {
   serverStart()
 }
 
-function serverReload(){
-  // console.log("hello")
-  fs.rmdirSync(dir + "/world/datapacks/generic_datapack/data", {recursive: true})
-  let DPdir = dir + '/world/datapacks/generic_datapack'
-        if(!fs.existsSync(DPdir)){
-          fs.mkdirSync(DPdir)
-        }
-        dataDir = DPdir + "/data"
-        // fse.copySync("./data",dataDir)
-        exec("xcopy /e /i /y \"./data\" \"" + dir + "/world/datapacks/generic_datapack/data\"", (err)=>{});
+let count = 0;
 
-        fs.copyFileSync('./pack.mcmeta' ,DPdir + "/pack.mcmeta",()=>{})
-        server.stdin.setEncoding('utf-8');
-        server.stdin.write("reload\n")
+function serverReload(){
+  count += 1;
+  if(count > 0){
+    for(i = 0; i < datapacks.length; i++){
+      fs.rmdirSync(dir + `/world/datapacks/generic_datapack_${i}/data`, {recursive: true})
+    }
+            for(i = 0; i < datapacks.length; i++){
+              if (!fs.existsSync(dir + `/world/datapacks/generic_datapack_${i}`)) {
+                fs.mkdirSync(dir + `/world/datapacks/generic_datapack_${i}`)
+              }
+              exec("xcopy /e /i /y \"" + datapacks[i] + "/data\" \"" + dir + `/world/datapacks/generic_datapack_${i}/data\"`, (err)=>{});
+              fs.copyFileSync(datapacks[i] + '\\pack.mcmeta', dir + `/world/datapacks/generic_datapack_${i}/pack.mcmeta`,()=>{})
+            }
+            server.stdin.setEncoding('utf-8');
+            server.stdin.write("reload\n")
+  }
 }
 
 function mcb_localhost(config) {

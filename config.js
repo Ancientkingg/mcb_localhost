@@ -47,11 +47,13 @@ function serverStart() {
         let local_end = perf.performance.now()
         console.log(LCL + "the localhost has successfully started in " + (local_end - local_start).toFixed(3) + " ms")
         for(i = 0; i < datapacks.length; i++){
-          if (!fs.existsSync(dir + `/world/datapacks/generic_datapack_${i}`)) {
-            fs.mkdirSync(dir + `/world/datapacks/generic_datapack_${i}`)
+          if(fs.existsSync(datapacks[i] + '\\pack.mcmeta')){
+            if (!fs.existsSync(dir + `/world/datapacks/generic_datapack_${i}`)) {
+              fs.mkdirSync(dir + `/world/datapacks/generic_datapack_${i}`)
+            }
+            exec("xcopy /e /i /y \"" + datapacks[i] + "/data\" \"" + dir + `/world/datapacks/generic_datapack_${i}/data\"`, (err)=>{});
+            fs.copyFileSync(datapacks[i] + '\\pack.mcmeta', dir + `/world/datapacks/generic_datapack_${i}/pack.mcmeta`,0 ,()=>{})
           }
-          exec("xcopy /e /i /y \"" + datapacks[i] + "/data\" \"" + dir + `/world/datapacks/generic_datapack_${i}/data\"`, (err)=>{});
-          fs.copyFileSync(datapacks[i] + '\\pack.mcmeta', dir + `/world/datapacks/generic_datapack_${i}/pack.mcmeta`,()=>{})
         }
         
         server.stdin.setEncoding('utf-8');
@@ -90,11 +92,13 @@ function serverReload(){
       fs.rmdirSync(dir + `/world/datapacks/generic_datapack_${i}/data`, {recursive: true})
     }
             for(i = 0; i < datapacks.length; i++){
-              if (!fs.existsSync(dir + `/world/datapacks/generic_datapack_${i}`)) {
-                fs.mkdirSync(dir + `/world/datapacks/generic_datapack_${i}`)
+              if(fs.existsSync(datapacks[i] + '\\pack.mcmeta')){
+                if (!fs.existsSync(dir + `/world/datapacks/generic_datapack_${i}`)) {
+                  fs.mkdirSync(dir + `/world/datapacks/generic_datapack_${i}`)
+                }
+                exec("xcopy /e /i /y \"" + datapacks[i] + "/data\" \"" + dir + `/world/datapacks/generic_datapack_${i}/data\"`, (err)=>{});
+                fs.copyFileSync(datapacks[i] + '\\pack.mcmeta', dir + `/world/datapacks/generic_datapack_${i}/pack.mcmeta`,0 ,()=>{})
               }
-              exec("xcopy /e /i /y \"" + datapacks[i] + "/data\" \"" + dir + `/world/datapacks/generic_datapack_${i}/data\"`, (err)=>{});
-              fs.copyFileSync(datapacks[i] + '\\pack.mcmeta', dir + `/world/datapacks/generic_datapack_${i}/pack.mcmeta`,()=>{})
             }
             server.stdin.setEncoding('utf-8');
             server.stdin.write("reload\n")

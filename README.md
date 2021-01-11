@@ -1,5 +1,5 @@
 # mcb_localhost
-An addon for mc-build, that enables error checking and a local server
+An addon for mc-build, that enables error checking and allows for a local server
 
 # To install the addon to mc-build:
 ```

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "remove": "node remove.js",
-    "install": "node index.js"
+    "setup": "node index.js"
   },
   "author": "Ancientkingg",
   "license": "MIT",

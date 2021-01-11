@@ -1,0 +1,15 @@
+{
+  "name": "mcb_localhost",
+  "version": "1.0.0",
+  "description": "An addon for mc-build",
+  "main": "index.js",
+  "scripts": {
+    "remove": "node remove.js",
+    "install": "node index.js"
+  },
+  "author": "Ancientkingg",
+  "license": "ISC",
+  "keywords": [
+    "mc-build"
+  ]
+}

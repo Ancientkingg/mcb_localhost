@@ -108,7 +108,7 @@ let count = 0;
 
 function serverReload(){
   count += 1;
-  if(count != 0){
+  if(count > 1){
     for(i = 0; i < datapacks.length; i++){
       fs.rmdirSync(dir + `/world/datapacks/generic_datapack_${i}/data`, {recursive: true})
     }

@@ -1,5 +1,26 @@
 //generated config
 
+module.exports = mcb_localhost({
+  mc: {
+    dev: false,
+    header: "#built using mc-build (https://github.com/mc-build/mc-build)",
+    internalScoreboard: "LANG_MC_INTERNAL",
+    rootNamespace: null,
+  },
+  global: {},
+});
+
+
+
+
+
+
+
+
+
+
+
+
 const fs = require("fs")
 const https = require("https")
 const { spawn } = require("child_process")
@@ -112,13 +133,3 @@ function mcb_localhost(config) {
   config.global.onBuildSuccess = serverReload
   return config;
 }
-
-module.exports = mcb_localhost({
-  mc: {
-    dev: false,
-    header: "#built using mc-build (https://github.com/mc-build/mc-build)",
-    internalScoreboard: "LANG_MC_INTERNAL",
-    rootNamespace: null,
-  },
-  global: {},
-});

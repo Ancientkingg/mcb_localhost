@@ -62,7 +62,7 @@ function serverStart() {
       serverOutput = data.toString();
       // console.log(LCL + serverOutput)
       if(serverOutput.includes("/ERROR")){
-        console.log(LCL + "\u001b[31m" + serverOutput.split("at ")[0].replace("java.util.concurrent.CompletionException: java.lang.IllegalArgumentException:", "").split("ERROR]: ")[1].replace("\r\n ", ": " ) + "\u001b[39m")
+        console.log(LCL + "\u001b[31m" + serverOutput.split("at java")[0].replace("java.util.concurrent.CompletionException: java.lang.IllegalArgumentException:", "").split("ERROR]: ")[1].replace("\r\n ", ": " ).replace(" Incorrect argument for command at","") + "\u001b[39m");
       }
       if (serverOutput.includes("Done")) {
         let local_end = perf.performance.now()

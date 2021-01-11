@@ -15,5 +15,4 @@ mcb -localhost
 ```
 cd mcb_localhost
 npm run remove
-
 ```

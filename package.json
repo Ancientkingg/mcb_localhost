@@ -8,8 +8,16 @@
     "install": "node index.js"
   },
   "author": "Ancientkingg",
-  "license": "ISC",
+  "license": "MIT",
   "keywords": [
     "mc-build"
-  ]
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ancientkingg/mcb_localhost.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Ancientkingg/mcb_localhost/issues"
+  },
+  "homepage": "https://github.com/Ancientkingg/mcb_localhost#readme"
 }

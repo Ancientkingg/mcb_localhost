@@ -11,3 +11,8 @@ npm install
 ```
 mcb -localhost
 ```
+# To remove the addon from mc-build
+```
+cd mcb_localhost
+npm remove
+```

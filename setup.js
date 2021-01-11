@@ -2,7 +2,7 @@ const fs = require("fs");
 let LCL = "[ " + "\u001b[35mlcl\u001b[39m" + " ] "
 const path = require("path");
 if(process.argv.includes("-localhost")){
-    if(fs.existsSync(path.resolve(process.cwd(), "./config.js"))){
+    if(fs.existsSync(path.resolve(process.cwd(), "./config.json"))){
         console.log(LCL + "\u001b[31mconfig.json detected\u001b[39m")
         console.log(LCL + "\u001b[31mPlease delete your config.json and use the config.js for your variables\u001b[39m")
         process.exit(1);

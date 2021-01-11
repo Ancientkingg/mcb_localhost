@@ -96,12 +96,15 @@ function serverReload(){
                 if (!fs.existsSync(dir + `/world/datapacks/generic_datapack_${i}`)) {
                   fs.mkdirSync(dir + `/world/datapacks/generic_datapack_${i}`)
                 }
-                exec("xcopy /e /i /y \"" + datapacks[i] + "/data\" \"" + dir + `/world/datapacks/generic_datapack_${i}/data\"`, (err)=>{});
-                fs.copyFileSync(datapacks[i] + '\\pack.mcmeta', dir + `/world/datapacks/generic_datapack_${i}/pack.mcmeta`,0 ,()=>{})
+                exec("xcopy /e /i /y \"" + datapacks[i] + "/data\" \"" + dir + `/world/datapacks/generic_datapack_${i}/data\"`, (err)=>{
+                  fs.copyFile(datapacks[i] + '\\pack.mcmeta', dir + `/world/datapacks/generic_datapack_${i}/pack.mcmeta`,0,()=>{
+                    server.stdin.setEncoding('utf-8');
+                    server.stdin.write("reload\n")
+                  })
+                });
               }
             }
-            server.stdin.setEncoding('utf-8');
-            server.stdin.write("reload\n")
+            
   }
 }
 

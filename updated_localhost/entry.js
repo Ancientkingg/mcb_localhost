@@ -86,7 +86,7 @@
   
   pkg.onBuildComplete.add(serverReload);
 
-  modufle.exports = function serverReload(){
+  module.exports = function serverReload(){
     count += 1;
     if(count > 1){
       for(i = 0; i < datapacks.length; i++){

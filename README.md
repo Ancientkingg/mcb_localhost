@@ -1,3 +1,6 @@
+
+# DEPRECATED PLEASE USE THE BUILT-IN COMMAND
+# REPO CAN BE FOUND https://github.com/Ancientkingg/localhost
 # mcb localhost
 An addon for mc-build, that enables error checking and allows for a local server
 
